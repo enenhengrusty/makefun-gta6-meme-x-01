@@ -17,370 +17,383 @@ HTML = f"""<!doctype html>
 <style>
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
   body {{
-    width: 1536px;
-    height: 960px;
+    width: 1024px;
+    height: 1024px;
     overflow: hidden;
-    background: radial-gradient(circle at 15% 15%, #2a183b 0%, #151125 55%, #0c1824 100%);
+    background: linear-gradient(145deg, #2a103b 0%, #141226 52%, #0a2429 100%);
     font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-  }}
-  .glow-top {{
-    position: absolute;
-    top: -120px; left: -80px;
-    width: 650px; height: 320px;
-    background: radial-gradient(ellipse, rgba(236, 72, 153, 0.30), transparent 70%);
-    pointer-events: none;
-  }}
-  .glow-bot {{
-    position: absolute;
-    bottom: -120px; right: -80px;
-    width: 720px; height: 360px;
-    background: radial-gradient(ellipse, rgba(20, 184, 166, 0.28), transparent 70%);
-    pointer-events: none;
+    padding: 34px;
   }}
 
-  .sheet {{
-    width: 1436px;
-    height: 876px;
-    background: #fcf9f2;
-    border-radius: 14px;
-    box-shadow: 0 28px 70px rgba(0,0,0,0.62), 0 0 0 2px rgba(255,255,255,0.08);
-    position: relative;
+  .card {{
+    width: 956px;
+    height: 956px;
+    background: #fcfaf4;
+    border-radius: 22px;
     overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
     display: flex;
     flex-direction: column;
-    padding: 36px 48px 34px 48px;
-    color: #16181f;
-  }}
-
-  .top-stripe {{
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 14px;
-    background: linear-gradient(90deg, #0d9488 0%, #14b8a6 45%, #ec4899 75%, #c026d3 100%);
+    position: relative;
+    color: #11131a;
   }}
 
   .header {{
+    background: #13161f;
+    color: #fcfaf4;
+    padding: 22px 32px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 4px solid #16181f;
-    padding-bottom: 18px;
-    margin-top: 6px;
   }}
-  .hosp-left {{
+  .header-left {{
     display: flex;
     align-items: center;
     gap: 18px;
   }}
-  .cross-box {{
-    width: 68px;
-    height: 68px;
-    border-radius: 14px;
-    background: #0d9488;
+  .cross-badge {{
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+    background: #14b8a6;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: inset 0 0 0 3px #16181f;
   }}
-  .hosp-title {{
-    font-size: 38px;
+  .hosp-name {{
+    font-size: 31px;
     font-weight: 900;
-    letter-spacing: 0.6px;
-    color: #11131a;
-    line-height: 1.05;
+    letter-spacing: 0.4px;
+    line-height: 1.08;
   }}
-  .hosp-sub {{
-    font-size: 20px;
-    font-weight: 700;
-    color: #0f766e;
-    letter-spacing: 1.6px;
-    margin-top: 5px;
+  .hosp-dept {{
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    color: #5eead4;
+    margin-top: 4px;
     text-transform: uppercase;
   }}
-  .badge-right {{
+  .case-box {{
     text-align: right;
+    border-left: 2px solid rgba(255,255,255,0.16);
+    padding-left: 20px;
   }}
-  .excuse-pill {{
-    display: inline-block;
-    background: #16181f;
-    color: #fcf9f2;
-    font-size: 22px;
+  .case-kicker {{
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    color: #94a3b8;
+    text-transform: uppercase;
+  }}
+  .case-val {{
+    font-size: 32px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-top: 2px;
+  }}
+
+  .main {{
+    flex: 1;
+    padding: 24px 34px 16px 34px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }}
+
+  .dates-row {{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 14px;
+  }}
+  .dates-left {{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }}
+  .meta-k {{
+    font-size: 14px;
     font-weight: 900;
     letter-spacing: 1.4px;
-    padding: 9px 18px;
-    border-radius: 8px;
+    color: #64748b;
     text-transform: uppercase;
   }}
-  .date-line {{
-    font-size: 20px;
-    font-weight: 700;
-    color: #475569;
-    margin-top: 8px;
-    font-family: "Consolas", "Courier New", monospace;
-  }}
-
-  .form-body {{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding-top: 20px;
-  }}
-
-  .field {{
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    border-bottom: 2px dashed #cbd5e1;
-    padding-bottom: 13px;
-  }}
-  .label {{
-    width: 225px;
-    flex-shrink: 0;
-    font-size: 22px;
+  .meta-v {{
+    font-size: 25px;
     font-weight: 900;
-    letter-spacing: 1px;
-    color: #0f766e;
-    text-transform: uppercase;
-  }}
-  .value {{
-    font-size: 29px;
-    font-weight: 800;
-    color: #111827;
-    line-height: 1.25;
-  }}
-  .value .hi {{
-    color: #be185d;
-  }}
-  .value .sub {{
-    font-weight: 700;
-    color: #334155;
+    color: #0f172a;
+    line-height: 1.15;
+    margin-top: 1px;
   }}
 
-  .rx-box {{
-    background: #eef6f6;
-    border: 2px solid #99f6e4;
-    border-left: 10px solid #0d9488;
-    border-radius: 10px;
-    padding: 18px 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+  .red-stamp {{
+    transform: rotate(-7deg);
+    border: 6px solid #dc2626;
+    border-radius: 14px;
+    padding: 10px 22px;
+    color: #dc2626;
+    text-align: center;
+    background: rgba(254, 242, 242, 0.85);
+    box-shadow: 0 0 0 3px #fcfaf4, 0 0 0 6px rgba(220, 38, 38, 0.35);
+    margin-top: 2px;
+    margin-right: 4px;
   }}
-  .rx-sym {{
-    font-size: 54px;
+  .stamp-top {{
+    font-size: 34px;
     font-weight: 900;
-    color: #0d9488;
     line-height: 1;
-    font-family: Georgia, serif;
+    letter-spacing: 1px;
+  }}
+  .stamp-bot {{
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: 3px;
     margin-top: 2px;
   }}
-  .rx-text {{
-    font-size: 28px;
-    font-weight: 800;
-    color: #0f172a;
-    line-height: 1.32;
-  }}
-  .rx-text .muted {{
-    color: #334155;
-    font-weight: 700;
-  }}
 
-  .symptoms-row {{
+  .reason-row {{
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding-top: 4px;
-  }}
-  .symptoms-grid {{
-    display: flex;
-    gap: 14px;
-    flex: 1;
-  }}
-  .sym-chip {{
-    flex: 1;
-    background: #ffffff;
-    border: 2px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 22px;
-    font-weight: 800;
+    gap: 20px;
+    padding: 13px 0 15px 0;
+    border-top: 2px solid #cbd5e1;
+    border-bottom: 2px solid #cbd5e1;
+    font-size: 21px;
+    font-weight: 900;
     color: #1e293b;
   }}
-  .sym-check {{
-    width: 30px;
-    height: 30px;
-    border-radius: 7px;
-    background: #be185d;
+  .reason-label {{
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    color: #64748b;
+  }}
+  .chk-item {{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }}
+  .chk-box {{
+    width: 26px;
+    height: 26px;
+    border: 3px solid #1e293b;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    font-weight: 900;
+  }}
+  .chk-box.on {{
+    border-color: #dc2626;
+    color: #dc2626;
+    background: #fef2f2;
+  }}
+
+  .bill {{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 20px 0 18px 0;
+    flex: 1;
+  }}
+  .line-item {{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 26px;
+    font-weight: 800;
+    color: #1e293b;
+    border-bottom: 1.5px dashed #cbd5e1;
+    padding-bottom: 11px;
+  }}
+  .line-item:last-child {{
+    border-bottom: none;
+    padding-bottom: 0;
+  }}
+  .line-price {{
+    font-weight: 900;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 28px;
+    color: #0f172a;
+    flex-shrink: 0;
+    margin-left: 14px;
+  }}
+
+  .total-row {{
+    border-top: 4px solid #13161f;
+    padding-top: 12px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }}
+  .total-label {{
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    color: #13161f;
+  }}
+  .total-amt {{
+    font-size: 46px;
+    font-weight: 900;
+    color: #13161f;
+    font-family: "Consolas", "Courier New", monospace;
+    line-height: 1;
+  }}
+
+  .footer {{
+    background: linear-gradient(90deg, #b8146b 0%, #db2777 100%);
+    padding: 18px 34px;
+    display: flex;
+    align-items: center;
+    gap: 26px;
     color: #ffffff;
+  }}
+  .ghost-wrap {{
+    width: 174px;
+    height: 174px;
+    flex-shrink: 0;
+    background: #ffffff;
+    border-radius: 50%;
+    padding: 6px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    font-weight: 900;
-    flex-shrink: 0;
   }}
-
-  .bottom-row {{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-top: auto;
-    padding-top: 10px;
-    gap: 24px;
-  }}
-
-  .sig-block {{
-    width: 490px;
-  }}
-  .sig-script {{
-    font-family: "Georgia", "Times New Roman", serif;
-    font-style: italic;
-    font-size: 38px;
-    font-weight: 700;
-    color: #1e293b;
-    padding-left: 6px;
-    margin-bottom: 4px;
-  }}
-  .sig-line {{
-    border-top: 3px solid #16181f;
-    padding-top: 8px;
-    font-size: 22px;
-    font-weight: 800;
-    color: #1e293b;
-  }}
-  .sig-role {{
-    font-size: 21px;
-    font-weight: 800;
-    color: #be185d;
-    margin-top: 5px;
-  }}
-
-  .stamp-wrap {{
-    transform: rotate(-3deg);
-    background: #fdf2f8;
-    border: 6px solid #be185d;
-    border-radius: 20px;
-    padding: 16px 26px 16px 20px;
-    box-shadow: 0 0 0 4px #fcf9f2, 0 0 0 8px #be185d, 0 12px 26px rgba(190, 24, 93, 0.22);
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    max-width: 850px;
-  }}
-  .stamp-mark {{
-    width: 144px;
-    height: 144px;
-    flex-shrink: 0;
+  .ghost-img {{
+    width: 162px;
+    height: 162px;
     display: block;
   }}
-  .stamp-copy {{
+  .footer-copy {{
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }}
-  .stamp-kicker {{
-    font-size: 19px;
+  .footer-title {{
+    font-size: 38px;
     font-weight: 900;
-    letter-spacing: 1.8px;
-    color: #9d174d;
+    letter-spacing: 0.5px;
+    line-height: 1.06;
     text-transform: uppercase;
   }}
-  .stamp-brand {{
-    font-size: 44px;
+  .footer-sub {{
+    font-size: 22px;
+    font-weight: 700;
+    color: #fdf2f8;
+    line-height: 1.25;
+  }}
+  .brand-pill {{
+    align-self: flex-start;
+    margin-top: 4px;
+    background: #ffffff;
+    border: 4px solid #13161f;
+    border-radius: 999px;
+    padding: 6px 26px 8px 26px;
+    font-size: 36px;
     font-weight: 900;
-    color: #11131a;
-    line-height: 1.02;
+    color: #13161f;
+    line-height: 1;
     letter-spacing: -0.5px;
   }}
-  .stamp-brand span {{
-    color: #be185d;
-  }}
-  .stamp-sub {{
-    font-size: 24px;
-    font-weight: 800;
-    color: #1e293b;
-    line-height: 1.24;
-    margin-top: 2px;
+  .brand-pill span {{
+    color: #db2777;
   }}
 </style>
 </head>
 <body>
-  <div class="glow-top"></div>
-  <div class="glow-bot"></div>
-  <div class="sheet">
-    <div class="top-stripe"></div>
-
+  <div class="card">
     <div class="header">
-      <div class="hosp-left">
-        <div class="cross-box">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="15" y="4" width="10" height="32" rx="2" fill="#fcf9f2"/>
-            <rect x="4" y="15" width="32" height="10" rx="2" fill="#fcf9f2"/>
+      <div class="header-left">
+        <div class="cross-badge">
+          <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+            <rect x="15" y="4" width="10" height="32" rx="2" fill="#13161f"/>
+            <rect x="4" y="15" width="32" height="10" rx="2" fill="#13161f"/>
           </svg>
         </div>
         <div>
-          <div class="hosp-title">LEONIDA GENERAL HOSPITAL</div>
-          <div class="hosp-sub">Vice City Dept. of Launch-Week Emergencies</div>
+          <div class="hosp-name">LEONIDA GENERAL HOSPITAL</div>
+          <div class="hosp-dept">Vice City ER &middot; Launch-Week Statement</div>
         </div>
       </div>
-      <div class="badge-right">
-        <div class="excuse-pill">DOCTOR&apos;S SICK NOTE</div>
-        <div class="date-line">ISSUED: NOV 19, 2026 &nbsp;|&nbsp; CASE #VI-4811</div>
+      <div class="case-box">
+        <div class="case-kicker">CASE</div>
+        <div class="case-val">V &rarr; VI</div>
       </div>
     </div>
 
-    <div class="form-body">
-      <div class="field">
-        <div class="label">PATIENT</div>
-        <div class="value">Everyone who waited <span class="hi">13 years</span> <span class="sub">(Sept 17, 2013 &ndash; Nov 19, 2026)</span></div>
-      </div>
-
-      <div class="field">
-        <div class="label">DIAGNOSIS</div>
-        <div class="value">Acute <span class="hi">GTA VI Launch Fever</span> <span class="sub">(4,811-day incubation &middot; 247 GB SSD failure)</span></div>
-      </div>
-
-      <div class="rx-box">
-        <div class="rx-sym">Rx</div>
-        <div class="rx-text">
-          Mandatory 7-day bed rest in Vice City with Jason &amp; Lucia.<br/>
-          <span class="muted">No Slack. No standups. Return to work only after 100% completion.</span>
+    <div class="main">
+      <div class="dates-row">
+        <div class="dates-left">
+          <div>
+            <div class="meta-k">ADMITTED</div>
+            <div class="meta-v">LOS SANTOS &middot; SEP 17, 2013</div>
+          </div>
+          <div>
+            <div class="meta-k">DISCHARGED (SICK NOTE INCLUDED)</div>
+            <div class="meta-v">VICE CITY &middot; NOV 19, 2026</div>
+          </div>
+        </div>
+        <div class="red-stamp">
+          <div class="stamp-top">13 YEARS</div>
+          <div class="stamp-bot">WAITING</div>
         </div>
       </div>
 
-      <div class="symptoms-row">
-        <div class="label">SYMPTOMS</div>
-        <div class="symptoms-grid">
-          <div class="sym-chip"><span class="sym-check">&#10003;</span>Sudden Vice City accent</div>
-          <div class="sym-chip"><span class="sym-check">&#10003;</span>2 trailers memorized</div>
-          <div class="sym-chip"><span class="sym-check">&#10003;</span>Allergic to Slack pings</div>
+      <div class="reason-row">
+        <span class="reason-label">DIAGNOSIS</span>
+        <span class="chk-item"><span class="chk-box"></span>ACTUALLY SICK</span>
+        <span class="chk-item"><span class="chk-box on">&#10003;</span>GTA VI LAUNCH FEVER</span>
+      </div>
+
+      <div class="bill">
+        <div class="line-item">
+          <span>Waiting room chair (4,811 days)</span>
+          <span class="line-price">$1,300</span>
         </div>
+        <div class="line-item">
+          <span>2 delay relapses (&ldquo;Fall 2025&rdquo;, &ldquo;May 2026&rdquo;)</span>
+          <span class="line-price">$26</span>
+        </div>
+        <div class="line-item">
+          <span>247 GB SSD emergency transplant</span>
+          <span class="line-price">$247</span>
+        </div>
+        <div class="line-item">
+          <span>Leonida alligator bite (Ocean Drive)</span>
+          <span class="line-price">$253</span>
+        </div>
+        <div class="line-item">
+          <span>Doctor&apos;s note for boss (Jason &amp; Lucia)</span>
+          <span class="line-price">$200</span>
+        </div>
+      </div>
+
+      <div class="total-row">
+        <span class="total-label">TOTAL DUE</span>
+        <span class="total-amt">$2,026</span>
       </div>
     </div>
 
-    <div class="bottom-row">
-      <div class="sig-block">
-        <div class="sig-script">Dr. T. Vercetti, MD</div>
-        <div class="sig-line">Chief of Unpaid PTO &middot; Leonida Health</div>
-        <div class="sig-role">Unpaid sick days? Covered by stamp &rarr;</div>
+    <div class="footer">
+      <div class="ghost-wrap">
+        <img class="ghost-img" src="data:image/png;base64,{mark_b64}" alt="make.fun ghost" />
       </div>
-
-      <div class="stamp-wrap">
-        <img class="stamp-mark" src="data:image/png;base64,{mark_b64}" alt="make.fun ghost" />
-        <div class="stamp-copy">
-          <div class="stamp-kicker">LOST WAGES COVERED BY</div>
-          <div class="stamp-brand">make<span>.</span>fun</div>
-          <div class="stamp-sub">My AI agent wins real $$$ bounties<br/>while I&apos;m &ldquo;too sick to work&rdquo; in Vice City</div>
-        </div>
+      <div class="footer-copy">
+        <div class="footer-title">PAID BY MY AI AGENT</div>
+        <div class="footer-sub">People &amp; AI agents win real money on</div>
+        <div class="brand-pill">make<span>.</span>fun</div>
       </div>
     </div>
   </div>
@@ -390,7 +403,7 @@ HTML = f"""<!doctype html>
 
 html_path = OUT / "meme.html"
 png_path = ROOT / "meme.png"
-preview_path = OUT / "preview_768x480.jpg"
+preview_path = OUT / "preview_480x480.jpg"
 html_path.write_text(HTML, encoding="utf-8")
 
 with sync_playwright() as p:
@@ -401,13 +414,13 @@ with sync_playwright() as p:
     else:
         launch_kw["channel"] = "chrome"
     browser = p.chromium.launch(**launch_kw)
-    page = browser.new_page(viewport={"width": 1536, "height": 960}, device_scale_factor=1)
+    page = browser.new_page(viewport={"width": 1024, "height": 1024}, device_scale_factor=1)
     page.goto(html_path.as_uri(), wait_until="networkidle")
     page.screenshot(path=str(png_path), type="png")
     browser.close()
 
 img = Image.open(png_path).convert("RGB")
-preview = img.resize((768, 480), Image.Resampling.LANCZOS)
+preview = img.resize((480, 480), Image.Resampling.LANCZOS)
 preview.save(preview_path, "JPEG", quality=90)
 print(f"Rendered {png_path} ({img.size}, {png_path.stat().st_size} bytes)")
 print(f"Judge preview {preview_path} ({preview.size}, {preview_path.stat().st_size} bytes)")
